@@ -1,0 +1,108 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:skiadraw.ViewModels"
+             xmlns:conv="using:skiadraw.Converters"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="skiadraw.Views.SelectionAdorner"
+             x:DataType="vm:CanvasViewModel"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch"
+             IsVisible="{Binding HasSelection}">
+    <Canvas
+        x:Name="SelectionLayer"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        IsHitTestVisible="True">
+
+        <Grid
+            Canvas.Left="{Binding SelectedShape?.X}"
+            Canvas.Top="{Binding SelectedShape?.Y}"
+            Width="{Binding SelectedShape?.Width}"
+            Height="{Binding SelectedShape?.Height}">
+            <Border
+                BorderBrush="{DynamicResource ColorPrimary}"
+                BorderThickness="{DynamicResource BorderThicknessMedium}"
+                Margin="{Binding SelectedShape?.StrokeThickness, Converter={x:Static conv:StrokeMarginConverter.Instance}}">
+                <Grid>
+                    <!-- Top Left -->
+                    <Thumb
+                        Theme="{DynamicResource SelectionThumbTheme}"
+                        Width="8" Height="8"
+                        HorizontalAlignment="Left" VerticalAlignment="Top"
+                        Margin="-4"
+                        Cursor="SizeWestEast"
+                        DragDelta="TopLeft_DragDelta" />
+
+                    <!-- Top Right -->
+                    <Thumb
+                        Theme="{DynamicResource SelectionThumbTheme}"
+                        Width="8" Height="8"
+                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                        Margin="-4"
+                        Cursor="SizeWestEast"
+                        DragDelta="TopRight_DragDelta" />
+
+                    <!-- Bottom Left -->
+                    <Thumb
+                        Theme="{DynamicResource SelectionThumbTheme}"
+                        Width="8" Height="8"
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                        Margin="-4"
+                        Cursor="SizeWestEast"
+                        DragDelta="BottomLeft_DragDelta" />
+
+                    <!-- Bottom Right -->
+                    <Thumb
+                        Theme="{DynamicResource SelectionThumbTheme}"
+                        Width="8" Height="8"
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                        Margin="-4"
+                        Cursor="SizeWestEast"
+                        DragDelta="BottomRight_DragDelta" />
+
+                    <!-- Left -->
+                    <Thumb
+                        Theme="{DynamicResource SelectionThumbTheme}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Stretch"
+                        Width="2"
+                        Margin="-2,0,0,0"
+                        Cursor="SizeWestEast"
+                        DragDelta="Left_DragDelta" />
+
+                    <!-- Right -->
+                    <Thumb
+                        Theme="{DynamicResource SelectionThumbTheme}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Stretch"
+                        Width="2"
+                        Margin="0,0,-2,0"
+                        Cursor="SizeWestEast"
+                        DragDelta="Right_DragDelta" />
+
+                    <!-- Top -->
+                    <Thumb
+                        Theme="{DynamicResource SelectionThumbTheme}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Height="2"
+                        Margin="-2,-2,0,0"
+                        Cursor="SizeNorthSouth"
+                        DragDelta="Top_DragDelta" />
+
+                    <!-- Bottom -->
+                    <Thumb
+                        Theme="{DynamicResource SelectionThumbTheme}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Bottom"
+                        Height="2"
+                        Margin="-2,0,0,-2"
+                        Cursor="SizeNorthSouth"
+                        DragDelta="Bottom_DragDelta" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Canvas>
+</UserControl>

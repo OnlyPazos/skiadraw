@@ -1,0 +1,122 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:v="using:skiadraw.Views"
+             xmlns:vm="using:skiadraw.ViewModels"
+             xmlns:conv="using:skiadraw.Converters"
+             xmlns:m="clr-namespace:skiadraw.Models"
+             mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="360"
+             x:Class="skiadraw.Views.Canvas"
+             x:DataType="vm:CanvasViewModel">
+
+    <Grid Name="Viewport"
+          ClipToBounds="True"
+          Background="Transparent"
+          PointerPressed="Viewport_OnPointerPressed"
+          PointerMoved="Viewport_OnPointerMoved"
+          PointerReleased="Viewport_OnPointerReleased"
+          PointerWheelChanged="Viewport_OnPointerWheelChanged">
+
+        <Grid Name="CanvasRoot">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                    <TranslateTransform X="0" Y="0" />
+                </TransformGroup>
+            </Grid.RenderTransform>
+
+            <Canvas
+                Name="DrawCanvas"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Cursor="{Binding SelectedTool, Converter={x:Static conv:ToolToCursorConverter.Instance}}"
+                PointerPressed="Canvas_OnPointerPressed"
+                PointerMoved="Canvas_OnPointerMoved"
+                PointerReleased="Canvas_OnPointerReleased">
+
+                <Canvas.Background>
+                    <DrawingBrush TileMode="Tile"
+                                  Stretch="None"
+                                  DestinationRect="0,0,20,20">
+                        <DrawingBrush.Drawing>
+                            <GeometryDrawing>
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="{DynamicResource ColorSurfaceHover}" Thickness="0.5">
+                                        <Pen.DashStyle>
+                                            <DashStyle Dashes="4,2" Offset="0" />
+                                        </Pen.DashStyle>
+                                    </Pen>
+                                </GeometryDrawing.Pen>
+
+                                <GeometryDrawing.Geometry>
+                                    <GeometryGroup>
+                                        <LineGeometry StartPoint="0,0" EndPoint="20,0" />
+                                        <LineGeometry StartPoint="0,0" EndPoint="0,20" />
+                                    </GeometryGroup>
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingBrush.Drawing>
+                    </DrawingBrush>
+                </Canvas.Background>
+            </Canvas>
+
+            <ItemsControl ZIndex="10" ItemsSource="{Binding Shapes}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.Styles>
+                    <Style Selector="ContentPresenter" x:DataType="m:ShapeModel">
+                        <Setter Property="Canvas.Left" Value="{Binding X}" />
+                        <Setter Property="Canvas.Top" Value="{Binding Y}" />
+                    </Style>
+                </ItemsControl.Styles>
+
+                <ItemsControl.DataTemplates>
+                    <DataTemplate DataType="{x:Type m:RectangleShape}">
+                        <Rectangle
+                            Width="{Binding Width}"
+                            Height="{Binding Height}"
+                            Fill="{Binding Fill}"
+                            Stroke="{Binding Stroke}"
+                            StrokeThickness="{Binding StrokeThickness}"
+                            StrokeDashArray="{Binding StrokeDashArray}"
+                            RadiusX="{Binding Radius}"
+                            RadiusY="{Binding Radius}"
+                            IsVisible="{Binding IsVisible}"
+                            Cursor="SizeAll"
+                            PointerPressed="Shape_OnPointerPressed"
+                            PointerMoved="Shape_OnPointerMoved"
+                            PointerReleased="Shape_OnPointerReleased"
+                            PointerEntered="Canvas_OnPointerEntered"
+                            PointerExited="Canvas_OnPointerExited" />
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type m:EllipseShape}">
+                        <Ellipse
+                            Width="{Binding Width}"
+                            Height="{Binding Height}"
+                            Fill="{Binding Fill}"
+                            Stroke="{Binding Stroke}"
+                            StrokeThickness="{Binding StrokeThickness}"
+                            StrokeDashArray="{Binding StrokeDashArray}"
+                            IsVisible="{Binding IsVisible}"
+                            Cursor="SizeAll"
+                            PointerPressed="Shape_OnPointerPressed"
+                            PointerMoved="Shape_OnPointerMoved"
+                            PointerReleased="Shape_OnPointerReleased"
+                            PointerEntered="Canvas_OnPointerEntered"
+                            PointerExited="Canvas_OnPointerExited" />
+                    </DataTemplate>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+
+            <v:SelectionAdorner ZIndex="20" DataContext="{Binding}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+        </Grid>
+    </Grid>
+</UserControl>

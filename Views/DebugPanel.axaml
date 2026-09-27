@@ -1,0 +1,87 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:skiadraw.ViewModels"
+             xmlns:m="clr-namespace:skiadraw.Models"
+             xmlns:v="clr-namespace:skiadraw.Views"
+             mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="360"
+             x:Class="skiadraw.Views.DebugPanel"
+             x:DataType="vm:DebugPanelViewModel"
+             CornerRadius="8">
+
+    <Design.DataContext>
+        <vm:DebugPanelViewModel />
+    </Design.DataContext>
+
+    <Border Background="{DynamicResource ColorBackground}"
+            BorderThickness="2"
+            BorderBrush="{DynamicResource ColorBackground}"
+            CornerRadius="{DynamicResource CornerRadiusSmall}"
+            Padding="{DynamicResource ThicknessSmall}"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            MinHeight="160"
+            MinWidth="320">
+        <StackPanel
+            Name="Panel"
+            Background="{DynamicResource ColorBackground}">
+
+            <TextBlock HorizontalAlignment="Right"
+                       Foreground="{DynamicResource ColorText}"
+                       FontSize="{DynamicResource FontSizeLarge}"
+                       FontStyle="Italic"
+                       FontWeight="Bold">
+                DEBUG INFO
+            </TextBlock>
+
+            <ItemsControl ItemsSource="{Binding Info}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel
+                            Orientation="Vertical"
+                            Margin="{DynamicResource ThicknessSmall}" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.DataTemplates>
+                    <DataTemplate DataType="{x:Type m:DebugSeparator}">
+                        <Border
+                            Margin=" 0,16,0,2"
+                            Padding="0,2"
+                            BorderBrush="Gray"
+                            BorderThickness="{DynamicResource ThicknessZero}">
+                            <TextBlock
+                                Foreground="{DynamicResource ColorText}"
+                                Text="{Binding Title}"
+                                FontSize="{DynamicResource FontSizeMedium}"
+                                FontStyle="Italic"
+                                FontWeight="Bold" />
+                        </Border>
+                    </DataTemplate>
+                    
+                    <DataTemplate DataType="{x:Type m:DebugInfo}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Text="{Binding Name}"
+                                Foreground="{DynamicResource ColorText}"
+                                FontSize="{DynamicResource FontSizeSmall}"
+                                FontWeight="Bold"
+                                FontStyle="Italic" />
+
+                            <TextBlock
+                                Foreground="{DynamicResource ColorText}"
+                                FontSize="{DynamicResource FontSizeSmall}"
+                                Text=": " />
+
+                            <TextBlock
+                                Foreground="{DynamicResource ColorText}"
+                                FontSize="{DynamicResource FontSizeSmall}"
+                                Text="{Binding Value}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+        </StackPanel>
+    </Border>
+</UserControl>

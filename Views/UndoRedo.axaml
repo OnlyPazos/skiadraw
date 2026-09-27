@@ -1,0 +1,36 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="skiadraw.Views.UndoRedo">
+    <Border Background="{DynamicResource ColorBackground}"
+            BorderThickness="2"
+            BorderBrush="{DynamicResource ColorBackground}"
+            CornerRadius="{DynamicResource CornerRadiusMedium}"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom">
+        <StackPanel 
+            Background="{DynamicResource ColorBackground}"
+            Orientation="Horizontal">
+            <Button 
+                HorizontalAlignment="Stretch"
+                CornerRadius="{DynamicResource CornerRadiusMediumLeft}" 
+                Padding="{DynamicResource PaddingButtonMedium}"
+                ToolTip.Tip="Undo"
+                ToolTip.Placement="Top"
+                ToolTip.VerticalOffset="-10">
+                ⬅️
+            </Button>
+            <Button 
+                HorizontalAlignment="Stretch"
+                CornerRadius="{DynamicResource CornerRadiusMediumRight}" 
+                Padding="{DynamicResource PaddingButtonMedium}"
+                ToolTip.Tip="Redo"
+                ToolTip.Placement="Top"
+                ToolTip.VerticalOffset="-10">
+                ➡️
+            </Button>
+        </StackPanel>
+    </Border>
+</UserControl>

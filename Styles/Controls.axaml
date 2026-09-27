@@ -1,0 +1,70 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ControlTheme x:Key="{x:Type ToolTip}" TargetType="ToolTip">
+                <Setter Property="Background" Value="{DynamicResource ColorSurface}" />
+                <Setter Property="Foreground" Value="{DynamicResource ColorText}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ColorPrimary}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="{DynamicResource CornerRadiusSmall}" />
+                <Setter Property="Padding" Value="8,4" />
+                <Setter Property="FontSize" Value="12" />
+            </ControlTheme>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <Style Selector="Button">
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDefault}" />
+    </Style>
+
+    <Style Selector="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDefault}" />
+    </Style>
+
+    <Style Selector="ToolTip">
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDefault}" />
+    </Style>
+
+    <Style Selector="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="{DynamicResource CornerRadiusSmall}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+    </Style>
+
+    <Style Selector="Button.tool">
+        <Setter Property="Width" Value="36" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="{DynamicResource CornerRadiusSmall}" />
+    </Style>
+
+    <Style Selector="Button.tool:pointerover">
+        <Setter Property="Background" Value="{DynamicResource ColorSurfaceHover}" />
+    </Style>
+
+    <Style Selector="Button.tool.selected">
+        <Setter Property="Background" Value="{DynamicResource ColorPrimary}" />
+        <Setter Property="Foreground" Value="{DynamicResource ColorMuted}" />
+    </Style>
+
+    <Style Selector="Rectangle">
+        <Setter Property="Fill" Value="{DynamicResource ColorSurface}" />
+        <Setter Property="Stroke" Value="{DynamicResource ColorSurface}" />
+        <Setter Property="StrokeThickness" Value="{DynamicResource StrokeZero}" />
+        <Setter Property="StrokeDashArray" Value="0" />
+        <Setter Property="RadiusX" Value="{DynamicResource RadiusMedium}"></Setter>
+        <Setter Property="RadiusY" Value="{DynamicResource RadiusMedium}"></Setter>
+    </Style>
+
+    <Style Selector="Ellipse">
+        <Setter Property="Fill" Value="{DynamicResource ColorSurface}" />
+        <Setter Property="Stroke" Value="{DynamicResource ColorSurface}" />
+        <Setter Property="StrokeThickness" Value="{DynamicResource StrokeZero}" />
+        <Setter Property="StrokeDashArray" Value="0" />
+    </Style>
+
+    <Style Selector="Thumb">
+        <Setter Property="Background" Value="{DynamicResource ColorPrimary}" />
+    </Style>
+</Styles>

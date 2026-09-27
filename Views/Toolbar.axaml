@@ -1,0 +1,110 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:skiadraw.ViewModels"
+             xmlns:m="using:skiadraw.Models"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="200"
+             x:Class="skiadraw.Views.Toolbar"
+             x:DataType="vm:ToolbarViewModel">
+
+    <Border Background="{DynamicResource ColorBackground}"
+            BorderThickness="2"
+            BorderBrush="{DynamicResource ColorBackground}"
+            CornerRadius="{DynamicResource CornerRadiusSmall}"
+            Padding="{DynamicResource ThicknessSmall}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Space1}">
+            <Button Name="BtnHand"
+                    ToolTip.Tip="Hand"
+                    Classes="tool"
+                    Classes.selected="{Binding SelectedTool, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static m:Tool.Hand}}"
+                    Command="{Binding SelectToolCommand}"
+                    CommandParameter="{x:Static m:Tool.Hand}">
+                <PathIcon Data="{StaticResource HandRaiseRegular}" />
+            </Button>
+
+            <Button Name="BtnSelection" 
+                    Classes="tool"
+                    ToolTip.Tip="Selection"
+                    Classes.selected="{Binding SelectedTool, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static m:Tool.Selection}}"
+                    Command="{Binding SelectToolCommand}"
+                    CommandParameter="{x:Static m:Tool.Selection}">
+                <PathIcon Data="{StaticResource CursorRegular}" />
+            </Button>
+
+            <Button Name="BtnRectangle" 
+                    Classes="tool" 
+                    ToolTip.Tip="Rectangle"
+                    Classes.selected="{Binding SelectedTool, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static m:Tool.Rectangle}}"
+                    Command="{Binding SelectToolCommand}"
+                    CommandParameter="{x:Static m:Tool.Rectangle}">
+                <PathIcon Data="{StaticResource TabRegular}" />
+            </Button>
+
+            <Button Name="BtnDiamond" 
+                    Classes="tool" 
+                    ToolTip.Tip="Diamond"
+                    Classes.selected="{Binding SelectedTool, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static m:Tool.Diamond}}"
+                    Command="{Binding SelectToolCommand}"
+                    CommandParameter="{x:Static m:Tool.Diamond}">
+                <PathIcon Data="{StaticResource TabRegular}" />
+            </Button>
+
+            <Button Name="BtnEllipsis" 
+                    Classes="tool" 
+                    ToolTip.Tip="Ellipsis"
+                    Classes.selected="{Binding SelectedTool, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static m:Tool.Ellipse}}"
+                    Command="{Binding SelectToolCommand}"
+                    CommandParameter="{x:Static m:Tool.Ellipse}">
+                <PathIcon Data="{StaticResource CircleRegular}" />
+            </Button>
+
+            <Button Name="BtnArrow" 
+                    Classes="tool" 
+                    ToolTip.Tip="Arrow"
+                    Classes.selected="{Binding SelectedTool, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static m:Tool.Arrow}}"
+                    Command="{Binding SelectToolCommand}"
+                    CommandParameter="{x:Static m:Tool.Arrow}">
+                <PathIcon Data="{StaticResource ArrowRightRegular}" />
+            </Button>
+
+            <Button Name="BtnLine" 
+                    Classes="tool" 
+                    ToolTip.Tip="Line"
+                    Classes.selected="{Binding SelectedTool, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static m:Tool.Line}}"
+                    Command="{Binding SelectToolCommand}"
+                    CommandParameter="{x:Static m:Tool.Line}">
+                <PathIcon Data="{StaticResource LineHorizontal1Regular}" />
+            </Button>
+
+            <Button Name="BtnDraw" 
+                    Classes="tool" 
+                    ToolTip.Tip="Draw"
+                    Classes.selected="{Binding SelectedTool, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static m:Tool.Draw}}"
+                    Command="{Binding SelectToolCommand}"
+                    CommandParameter="{x:Static m:Tool.Draw}">
+                <PathIcon Data="{StaticResource HandRaiseRegular}" />
+            </Button>
+
+            <Button Name="BtnText" 
+                    Classes="tool" 
+                    ToolTip.Tip="Text"
+                    Classes.selected="{Binding SelectedTool, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static m:Tool.Text}}"
+                    Command="{Binding SelectToolCommand}"
+                    CommandParameter="{x:Static m:Tool.Text}">
+                <PathIcon Data="{StaticResource TextRegular}" />
+            </Button>
+
+            <Button Name="BtnEraser"
+                    Classes="tool"
+                    ToolTip.Tip="Erase"
+                    Classes.selected="{Binding SelectedTool, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static m:Tool.Eraser}}"
+                    Command="{Binding SelectToolCommand}"
+                    CommandParameter="{x:Static m:Tool.Eraser}">
+                <PathIcon Data="{StaticResource EraseRegular}" />
+            </Button>
+        </StackPanel>
+    </Border>
+</UserControl>

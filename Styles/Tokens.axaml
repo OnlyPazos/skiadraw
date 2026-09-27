@@ -1,0 +1,115 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Fuentes de letra -->
+    <FontFamily x:Key="FontFamilyDefault">Inter</FontFamily>
+    <FontFamily x:Key="FontFamilyMono">JetBrains Mono</FontFamily>
+    
+    <!-- Tamaños de letra -->
+    <x:Double x:Key="FontSizeExtraSmall">11</x:Double>
+    <x:Double x:Key="FontSizeSmall">12</x:Double>
+    <x:Double x:Key="FontSizeMedium">14</x:Double>
+    <x:Double x:Key="FontSizeLarge">16</x:Double>
+    <x:Double x:Key="FontSizeExtraLarge">20</x:Double>
+    <x:Double x:Key="FontSizeExtraExtraLarge">24</x:Double>
+
+    <!-- Colores -->
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+            <Color x:Key="ColorPrimary">#2563EB</Color>
+            <Color x:Key="ColorBackground">#F8FAFC</Color>
+            <Color x:Key="ColorSurface">#FFFFFF</Color>
+            <Color x:Key="ColorSurfaceHover">#F1F5F9</Color>
+            <Color x:Key="ColorText">#1E293B</Color>
+            <Color x:Key="ColorMuted">#64748B</Color>
+            <Color x:Key="ColorError">#DC2626</Color>
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Dark">
+            <Color x:Key="ColorPrimary">#3B82F6</Color>
+            <Color x:Key="ColorBackground">#0F172A</Color>
+            <Color x:Key="ColorSurface">#1E293B</Color>
+            <Color x:Key="ColorSurfaceHover">#334155</Color>
+            <Color x:Key="ColorText">#D1D5D9</Color>
+            <Color x:Key="ColorMuted">#B4C3D8</Color>
+            <Color x:Key="ColorError">#EF4444</Color>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+    <!-- Espaciado -->
+    <x:Double x:Key="Space1">4</x:Double>
+    <x:Double x:Key="Space2">8</x:Double>
+    <x:Double x:Key="Space3">12</x:Double>
+    <x:Double x:Key="Space4">16</x:Double>
+    <x:Double x:Key="Space5">24</x:Double>
+
+    <!-- Grosor del stroke -->
+    <x:Double x:Key="StrokeZero">0</x:Double>
+    <x:Double x:Key="StrokeSmall">1</x:Double>
+    <x:Double x:Key="StrokeMedium">2</x:Double>
+    <x:Double x:Key="StrokeLarge">4</x:Double>
+    
+    <!-- Tipo de stroke -->
+    <x:String x:Key="StrokeContinuous">0,0</x:String>
+    <x:String x:Key="StrokeDashed">4,2</x:String>
+
+    <!-- Radio -->
+    <x:Double x:Key="RadiusZero">0</x:Double>
+    <x:Double x:Key="RadiusSmall">2</x:Double>
+    <x:Double x:Key="RadiusMedium">4</x:Double>
+    <x:Double x:Key="RadiusLarge">16</x:Double>
+    <x:Double x:Key="RadiusExtraLarge">32</x:Double>
+    <x:Double x:Key="RadiusExtraExtraLarge">64</x:Double>
+
+    <!-- Esquinas Redondeadas -->
+    <!-- CornerRadius: TopLeft, TopRight, BottomRight, BottomLeft -->
+    <CornerRadius x:Key="CornerRadiusZero">0</CornerRadius>
+
+    <!-- Small -->
+    <CornerRadius x:Key="CornerRadiusSmall">4</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusSmallTop">4,4,0,0</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusSmallBottom">0,0,4,4</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusSmallLeft">4,0,0,4</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusSmallRight">0,4,4,0</CornerRadius>
+
+    <!-- Medium -->
+    <CornerRadius x:Key="CornerRadiusMedium">8</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusMediumTop">8,8,0,0</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusMediumBottom">0,0,8,8</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusMediumLeft">8,0,0,8</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusMediumRight">0,8,8,0</CornerRadius>
+
+    <!-- Large -->
+    <CornerRadius x:Key="CornerRadiusLarge">12</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusLargeTop">12,12,0,0</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusLargeBottom">0,0,12,12</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusLargeLeft">12,0,0,12</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusLargeRight">0,12,12,0</CornerRadius>
+
+    <!-- Thickness -->
+    <Thickness x:Key="ThicknessZero">0</Thickness>
+    
+    <!-- Extra Small -->
+    <Thickness x:Key="ThicknessExtraSmall">2</Thickness>
+    <Thickness x:Key="ThicknessExtraSmallHorizontal">2,0</Thickness>
+    <Thickness x:Key="ThicknessExtraSmallVertical">0,2</Thickness>
+
+    <!-- Small -->
+    <Thickness x:Key="ThicknessSmall">4</Thickness>
+    <Thickness x:Key="ThicknessSmallHorizontal">4,0</Thickness>
+    <Thickness x:Key="ThicknessSmallVertical">0,4</Thickness>
+
+    <!-- Medium -->
+    <Thickness x:Key="ThicknessMedium">8</Thickness>
+    <Thickness x:Key="ThicknessMediumHorizontal">8,0</Thickness>
+    <Thickness x:Key="ThicknessMediumVertical">0,8</Thickness>
+
+    <!-- Large -->
+    <Thickness x:Key="ThicknessLarge">12</Thickness>
+    <Thickness x:Key="ThicknessLargeHorizontal">12,0</Thickness>
+    <Thickness x:Key="ThicknessLargeVertical">0,12</Thickness>
+
+    <!-- Specifics -->
+    <Thickness x:Key="PaddingButtonMedium">16,8</Thickness>
+    <Thickness x:Key="BorderThicknessSmall">1</Thickness>
+    <Thickness x:Key="BorderThicknessMedium">2</Thickness>
+</ResourceDictionary>

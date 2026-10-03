@@ -2,6 +2,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using skiadraw.Models;
 using skiadraw.ViewModels;
@@ -55,5 +56,14 @@ public partial class SelectionAdorner : UserControl
     private void Bottom_DragDelta(object? sender, VectorEventArgs e)
     {
         Vm?.ResizeShape(ResizeHandle.Bottom,  e.Vector);
+    }
+    
+    private void Rotate_Started(object? sender, VectorEventArgs e) => Vm?.HandleStartRotation();
+    private void Rotate_Completed(object? sender, VectorEventArgs e) => Vm?.HandleCompleteRotation();
+
+    private void Rotate_Moved(object? sender, PointerEventArgs e)
+    {
+        var p = e.GetPosition(SelectionLayer);
+        Vm?.HandleRotate(e, p);
     }
 }

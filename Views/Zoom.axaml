@@ -2,8 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:skiadraw.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="skiadraw.Views.Zoom">
+             x:Class="skiadraw.Views.Zoom"
+             x:DataType="vm:CanvasViewModel">
     <Border Background="{DynamicResource ColorBackground}"
             BorderThickness="2"
             BorderBrush="{DynamicResource ColorBackground}"
@@ -17,6 +19,7 @@
                 HorizontalAlignment="Stretch"
                 CornerRadius="{DynamicResource CornerRadiusMediumLeft}" 
                 Padding="{DynamicResource PaddingButtonMedium}"
+                Command="{Binding ZoomOutCommand}"
                 ToolTip.Tip="Zoom Out"
                 ToolTip.Placement="Top"
                 ToolTip.VerticalOffset="-10">
@@ -24,18 +27,20 @@
             </Button>
             <Button 
                 HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
                 CornerRadius="{DynamicResource CornerRadiusZero}" 
                 FontSize="12" 
-                Padding="16, 8"
+                Command="{Binding ResetZoomCommand}"
+                Content="{Binding Zoom, StringFormat={}{0:P0}}"
                 ToolTip.Tip="Reset zoom"
                 ToolTip.Placement="Top"
                 ToolTip.VerticalOffset="-10">
-                100%
             </Button>
             <Button 
                 HorizontalAlignment="Stretch"
                 CornerRadius="{DynamicResource CornerRadiusMediumRight}" 
                 Padding="{DynamicResource PaddingButtonMedium}"
+                Command="{Binding ZoomInCommand}"
                 ToolTip.Tip="Zoom In"
                 ToolTip.Placement="Top"
                 ToolTip.VerticalOffset="-10">

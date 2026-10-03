@@ -21,7 +21,7 @@
         <Grid Name="CanvasRoot">
             <Grid.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                    <ScaleTransform ScaleX="{Binding Zoom}" ScaleY="{Binding Zoom}" />
                     <TranslateTransform X="0" Y="0" />
                 </TransformGroup>
             </Grid.RenderTransform>
@@ -88,11 +88,16 @@
                             RadiusY="{Binding Radius}"
                             IsVisible="{Binding IsVisible}"
                             Cursor="SizeAll"
+                            RenderTransformOrigin="50%,50%"
                             PointerPressed="Shape_OnPointerPressed"
                             PointerMoved="Shape_OnPointerMoved"
                             PointerReleased="Shape_OnPointerReleased"
                             PointerEntered="Canvas_OnPointerEntered"
-                            PointerExited="Canvas_OnPointerExited" />
+                            PointerExited="Canvas_OnPointerExited">
+                            <Rectangle.RenderTransform>
+                                <RotateTransform Angle="{Binding Rotation}" />
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
                     </DataTemplate>
 
                     <DataTemplate DataType="{x:Type m:EllipseShape}">
@@ -105,11 +110,16 @@
                             StrokeDashArray="{Binding StrokeDashArray}"
                             IsVisible="{Binding IsVisible}"
                             Cursor="SizeAll"
+                            RenderTransformOrigin="50%,50%"
                             PointerPressed="Shape_OnPointerPressed"
                             PointerMoved="Shape_OnPointerMoved"
                             PointerReleased="Shape_OnPointerReleased"
                             PointerEntered="Canvas_OnPointerEntered"
-                            PointerExited="Canvas_OnPointerExited" />
+                            PointerExited="Canvas_OnPointerExited">
+                            <Ellipse.RenderTransform>
+                                <RotateTransform Angle="{Binding Rotation}" />
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
                     </DataTemplate>
                 </ItemsControl.DataTemplates>
             </ItemsControl>

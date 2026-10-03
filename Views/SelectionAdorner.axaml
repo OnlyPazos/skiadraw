@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:skiadraw.ViewModels"
              xmlns:conv="using:skiadraw.Converters"
+             xmlns:extensions="clr-namespace:skiadraw.Extensions"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="skiadraw.Views.SelectionAdorner"
              x:DataType="vm:CanvasViewModel"
@@ -20,89 +21,104 @@
             Canvas.Left="{Binding SelectedShape?.X}"
             Canvas.Top="{Binding SelectedShape?.Y}"
             Width="{Binding SelectedShape?.Width}"
-            Height="{Binding SelectedShape?.Height}">
-            <Border
-                BorderBrush="{DynamicResource ColorPrimary}"
-                BorderThickness="{DynamicResource BorderThicknessMedium}"
-                Margin="{Binding SelectedShape?.StrokeThickness, Converter={x:Static conv:StrokeMarginConverter.Instance}}">
-                <Grid>
-                    <!-- Top Left -->
-                    <Thumb
-                        Theme="{DynamicResource SelectionThumbTheme}"
-                        Width="8" Height="8"
-                        HorizontalAlignment="Left" VerticalAlignment="Top"
-                        Margin="-4"
-                        Cursor="SizeWestEast"
-                        DragDelta="TopLeft_DragDelta" />
+            Height="{Binding SelectedShape?.Height}"
+            RenderTransformOrigin="50%,50%">
+            <Grid.RenderTransform>
+                <RotateTransform Angle="{Binding SelectedShape?.Rotation}" />
+            </Grid.RenderTransform>
+            
+            <Grid>
+                <!-- Top Center (Angle) -->
+                <Thumb
+                    x:Name="RotateThumb"
+                    Theme="{DynamicResource SelectionThumbTheme}"
+                    Width="8" Height="8"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Margin="0,-20,0,0"
+                    Cursor="{extensions:GeometryCursor
+                                Geometry={StaticResource HandOpenRegular},
+                                Stroke=White, StrokeThickness=1,
+                                HotspotX=12, HotspotY=12}"
+                    DragStarted="Rotate_Started"
+                    DragCompleted="Rotate_Completed"
+                    PointerMoved="Rotate_Moved"/>
+                
+                <!-- Top Left -->
+                <Thumb
+                    Theme="{DynamicResource SelectionThumbTheme}"
+                    Width="8" Height="8"
+                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Margin="-4"
+                    Cursor="TopLeftCorner"
+                    DragDelta="TopLeft_DragDelta" />
 
-                    <!-- Top Right -->
-                    <Thumb
-                        Theme="{DynamicResource SelectionThumbTheme}"
-                        Width="8" Height="8"
-                        HorizontalAlignment="Right" VerticalAlignment="Top"
-                        Margin="-4"
-                        Cursor="SizeWestEast"
-                        DragDelta="TopRight_DragDelta" />
+                <!-- Top Right -->
+                <Thumb
+                    Theme="{DynamicResource SelectionThumbTheme}"
+                    Width="8" Height="8"
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Margin="-4"
+                    Cursor="TopRightCorner"
+                    DragDelta="TopRight_DragDelta" />
 
-                    <!-- Bottom Left -->
-                    <Thumb
-                        Theme="{DynamicResource SelectionThumbTheme}"
-                        Width="8" Height="8"
-                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                        Margin="-4"
-                        Cursor="SizeWestEast"
-                        DragDelta="BottomLeft_DragDelta" />
+                <!-- Bottom Left -->
+                <Thumb
+                    Theme="{DynamicResource SelectionThumbTheme}"
+                    Width="8" Height="8"
+                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                    Margin="-4"
+                    Cursor="BottomLeftCorner"
+                    DragDelta="BottomLeft_DragDelta" />
 
-                    <!-- Bottom Right -->
-                    <Thumb
-                        Theme="{DynamicResource SelectionThumbTheme}"
-                        Width="8" Height="8"
-                        HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                        Margin="-4"
-                        Cursor="SizeWestEast"
-                        DragDelta="BottomRight_DragDelta" />
+                <!-- Bottom Right -->
+                <Thumb
+                    Theme="{DynamicResource SelectionThumbTheme}"
+                    Width="8" Height="8"
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    Margin="-4"
+                    Cursor="BottomRightCorner"
+                    DragDelta="BottomRight_DragDelta" />
 
-                    <!-- Left -->
-                    <Thumb
-                        Theme="{DynamicResource SelectionThumbTheme}"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Stretch"
-                        Width="2"
-                        Margin="-2,0,0,0"
-                        Cursor="SizeWestEast"
-                        DragDelta="Left_DragDelta" />
+                <!-- Left -->
+                <Thumb
+                    Theme="{DynamicResource SelectionThumbTheme}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Stretch"
+                    Width="1"
+                    Margin="-2. 4. 0,4"
+                    Cursor="SizeWestEast"
+                    DragDelta="Left_DragDelta" />
 
-                    <!-- Right -->
-                    <Thumb
-                        Theme="{DynamicResource SelectionThumbTheme}"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Stretch"
-                        Width="2"
-                        Margin="0,0,-2,0"
-                        Cursor="SizeWestEast"
-                        DragDelta="Right_DragDelta" />
+                <!-- Right -->
+                <Thumb
+                    Theme="{DynamicResource SelectionThumbTheme}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Stretch"
+                    Width="1"
+                    Margin="0. 4. -2,4"
+                    Cursor="SizeWestEast"
+                    DragDelta="Right_DragDelta" />
 
-                    <!-- Top -->
-                    <Thumb
-                        Theme="{DynamicResource SelectionThumbTheme}"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Top"
-                        Height="2"
-                        Margin="-2,-2,0,0"
-                        Cursor="SizeNorthSouth"
-                        DragDelta="Top_DragDelta" />
+                <!-- Top -->
+                <Thumb
+                    Theme="{DynamicResource SelectionThumbTheme}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    Height="1"
+                    Margin="4,-2,4,0"
+                    Cursor="SizeNorthSouth"
+                    DragDelta="Top_DragDelta" />
 
-                    <!-- Bottom -->
-                    <Thumb
-                        Theme="{DynamicResource SelectionThumbTheme}"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Bottom"
-                        Height="2"
-                        Margin="-2,0,0,-2"
-                        Cursor="SizeNorthSouth"
-                        DragDelta="Bottom_DragDelta" />
-                </Grid>
-            </Border>
+                <!-- Bottom -->
+                <Thumb
+                    Theme="{DynamicResource SelectionThumbTheme}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom"
+                    Height="1"
+                    Margin="4,0,4, -2"
+                    Cursor="SizeNorthSouth"
+                    DragDelta="Bottom_DragDelta" />
+            </Grid>
         </Grid>
     </Canvas>
 </UserControl>

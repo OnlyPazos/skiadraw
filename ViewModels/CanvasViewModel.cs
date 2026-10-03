@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using skiadraw.Models;
 using skiadraw.States;
 
@@ -12,6 +13,12 @@ namespace skiadraw.ViewModels;
 
 public partial class CanvasViewModel : ViewModelBase
 {
+    const double MinSize = 20;
+    const double MinZoom = 0.10; // 10%
+    const double DefaultZoom = 1.0; // 10%
+    const double MaxZoom = 10.0; // 1000%
+    private const double ZoomStep = 1.1;
+
     private readonly DrawingState _state;
     private readonly DebugPanelViewModel _inspector;
 
@@ -31,9 +38,34 @@ public partial class CanvasViewModel : ViewModelBase
     [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasSelection))]
     private ShapeModel? _selectedShape;
 
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(ZoomInCommand))]
+    [NotifyCanExecuteChangedFor(nameof(ZoomOutCommand))]
+    private double _zoom = DefaultZoom; // 100%
+
+    [ObservableProperty] private bool _rotating;
+
+    public void SetZoom(double newZoom)
+    {
+        Zoom = Math.Clamp(newZoom, MinZoom, MaxZoom);
+    }
+
+    [RelayCommand(CanExecute = nameof(CanZoomIn))]
+    public void ZoomIn() => SetZoom(Zoom * ZoomStep);
+
+    [RelayCommand(CanExecute = nameof(CanZoomOut))]
+    public void ZoomOut() => SetZoom(Zoom / ZoomStep);
+    
+    [RelayCommand]
+    public void ResetZoom() => SetZoom(DefaultZoom);
+
+    private bool CanZoomIn() => Zoom < MaxZoom;
+    private bool CanZoomOut() => Zoom > MinZoom;
+
+    public void ZoomBy(double factor) => SetZoom(Zoom * factor);
+
     public bool HasSelection => SelectedShape is not null;
 
-    const double MIN_SIZE = 20;
 
     public CanvasViewModel(DebugPanelViewModel inspector, DrawingState state)
     {
@@ -53,7 +85,7 @@ public partial class CanvasViewModel : ViewModelBase
         var point = e.GetCurrentPoint(viewport);
 
         if (!point.Properties.IsMiddleButtonPressed) return;
-        
+
         _panStart = point.Position;
         _panStartX = panTransform.X;
         _panStartY = panTransform.Y;
@@ -84,9 +116,9 @@ public partial class CanvasViewModel : ViewModelBase
         ScaleTransform zoomTransform,
         PointerWheelEventArgs e)
     {
-        var oldZoom = zoomTransform.ScaleX;
+        var oldZoom = Zoom;
         var delta = e.Delta.Y > 0 ? 1.1 : 1 / 1.1;
-        var newZoom = Math.Clamp(oldZoom * delta, 0.1, 10);
+        var newZoom = Math.Clamp(oldZoom * delta, MinZoom, MaxZoom);
 
         var pointerPos = e.GetPosition(viewport);
         var offsetX = pointerPos.X - panTransform.X;
@@ -95,8 +127,7 @@ public partial class CanvasViewModel : ViewModelBase
         panTransform.X -= offsetX * (newZoom / oldZoom - 1);
         panTransform.Y -= offsetY * (newZoom / oldZoom - 1);
 
-        zoomTransform.ScaleX = newZoom;
-        zoomTransform.ScaleY = newZoom;
+        SetZoom(newZoom);
 
         e.Handled = true;
     }
@@ -184,12 +215,12 @@ public partial class CanvasViewModel : ViewModelBase
         switch (handle)
         {
             case ResizeHandle.BottomRight:
-                shape.Width = Math.Max(MIN_SIZE, shape.Width + delta.X);
-                shape.Height = Math.Max(MIN_SIZE, shape.Height + delta.Y);
+                shape.Width = Math.Max(MinSize, shape.Width + delta.X);
+                shape.Height = Math.Max(MinSize, shape.Height + delta.Y);
                 break;
             case ResizeHandle.TopRight:
-                shape.Width = Math.Max(MIN_SIZE, shape.Width + delta.X);
-                if (newHeight >= MIN_SIZE)
+                shape.Width = Math.Max(MinSize, shape.Width + delta.X);
+                if (newHeight >= MinSize)
                 {
                     shape.Y += delta.Y;
                     shape.Height = newHeight;
@@ -197,23 +228,23 @@ public partial class CanvasViewModel : ViewModelBase
 
                 break;
             case ResizeHandle.BottomLeft:
-                if (newWidth >= MIN_SIZE)
+                if (newWidth >= MinSize)
                 {
                     shape.X += delta.X;
                     shape.Width = newWidth;
                 }
 
-                shape.Height = Math.Max(MIN_SIZE, shape.Height + delta.Y);
+                shape.Height = Math.Max(MinSize, shape.Height + delta.Y);
 
                 break;
             case ResizeHandle.TopLeft:
-                if (newWidth >= MIN_SIZE)
+                if (newWidth >= MinSize)
                 {
                     shape.X += delta.X;
                     shape.Width = newWidth;
                 }
 
-                if (newHeight >= MIN_SIZE)
+                if (newHeight >= MinSize)
                 {
                     shape.Y += delta.Y;
                     shape.Height = newHeight;
@@ -221,10 +252,10 @@ public partial class CanvasViewModel : ViewModelBase
 
                 break;
             case ResizeHandle.Bottom:
-                shape.Height = Math.Max(MIN_SIZE, shape.Height + delta.Y);
+                shape.Height = Math.Max(MinSize, shape.Height + delta.Y);
                 break;
             case ResizeHandle.Left:
-                if (newWidth >= MIN_SIZE)
+                if (newWidth >= MinSize)
                 {
                     shape.X += delta.X;
                     shape.Width = newWidth;
@@ -232,10 +263,10 @@ public partial class CanvasViewModel : ViewModelBase
 
                 break;
             case ResizeHandle.Right:
-                shape.Width = Math.Max(MIN_SIZE, shape.Width + delta.X);
+                shape.Width = Math.Max(MinSize, shape.Width + delta.X);
                 break;
             case ResizeHandle.Top:
-                if (newHeight >= MIN_SIZE)
+                if (newHeight >= MinSize)
                 {
                     shape.Y += delta.Y;
                     shape.Height = newHeight;
@@ -296,6 +327,24 @@ public partial class CanvasViewModel : ViewModelBase
         _shapeStartPosition = null;
     }
 
+    public void HandleStartRotation() => Rotating = true;
+    public void HandleCompleteRotation() => Rotating = false;
+
+    public void HandleRotate(PointerEventArgs e, Point p)
+    {
+        if (!Rotating || SelectedShape is null) return;
+
+        var c = SelectedShape.Center;
+
+        double angle = Math.Atan2(p.Y - c.Y, p.X - c.X) * 180 / Math.PI + 90;
+
+        // Shift = steps of 15°
+        if (e.KeyModifiers.HasFlag(KeyModifiers.Shift))
+            angle = Math.Round(angle / 15) * 15;
+
+        SelectedShape.Rotation = (angle % 360 + 360) % 360;
+    }
+
 
     // SHAPE CREATION
     private ShapeModel? CreateShape(Point point)
@@ -337,7 +386,7 @@ public partial class CanvasViewModel : ViewModelBase
 
     private static bool IsShapeTooSmall(ShapeModel shape)
     {
-        return shape.Width < MIN_SIZE || shape.Height < MIN_SIZE;
+        return shape.Width < MinSize || shape.Height < MinSize;
     }
 
 

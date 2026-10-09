@@ -55,7 +55,7 @@ public partial class CanvasViewModel : ViewModelBase
 
     [RelayCommand(CanExecute = nameof(CanZoomOut))]
     public void ZoomOut() => SetZoom(Zoom / ZoomStep);
-    
+
     [RelayCommand]
     public void ResetZoom() => SetZoom(DefaultZoom);
 
@@ -83,9 +83,11 @@ public partial class CanvasViewModel : ViewModelBase
     public void HandleViewportPointerPressed(Grid viewport, TranslateTransform panTransform, PointerPressedEventArgs e)
     {
         var point = e.GetCurrentPoint(viewport);
+        var props = point.Properties;
+        var isPanGesture = props.IsMiddleButtonPressed || (SelectedTool == Tool.Hand && props.IsLeftButtonPressed);
 
-        if (!point.Properties.IsMiddleButtonPressed) return;
-        
+        if (!isPanGesture) return;
+
         viewport.Classes.Set("panning", true);
 
         _panStart = point.Position;
@@ -109,18 +111,15 @@ public partial class CanvasViewModel : ViewModelBase
     {
         if (_panStart is null) return;
         _panStart = null;
-        
+
         if (sender is StyledElement viewport)
             viewport.Classes.Set("panning", false);
-        
+
         e.Pointer.Capture(null);
         e.Handled = true;
     }
 
-    public void HandleViewportPointerWheelChanged(Grid viewport,
-        TranslateTransform panTransform,
-        ScaleTransform zoomTransform,
-        PointerWheelEventArgs e)
+    public void HandleViewportPointerWheelChanged(Grid viewport, TranslateTransform panTransform, PointerWheelEventArgs e)
     {
         var oldZoom = Zoom;
         var delta = e.Delta.Y > 0 ? 1.1 : 1 / 1.1;

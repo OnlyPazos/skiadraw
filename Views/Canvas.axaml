@@ -14,7 +14,6 @@
     <Grid Name="Viewport"
           ClipToBounds="True"
           Background="Transparent"
-          PointerPressed="Viewport_OnPointerPressed"
           PointerMoved="Viewport_OnPointerMoved"
           PointerReleased="Viewport_OnPointerReleased"
           PointerWheelChanged="Viewport_OnPointerWheelChanged">

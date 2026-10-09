@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Media;
 using skiadraw.Models;
 using skiadraw.ViewModels;
@@ -9,8 +10,6 @@ namespace skiadraw.Views;
 public partial class Canvas : UserControl
 {
     private CanvasViewModel? Vm => DataContext as CanvasViewModel;
-    private ScaleTransform ZoomTransform =>
-        (ScaleTransform)((TransformGroup)CanvasRoot.RenderTransform!).Children[0];
 
     private TranslateTransform PanTransform =>
         (TranslateTransform)((TransformGroup)CanvasRoot.RenderTransform!).Children[1];
@@ -18,6 +17,7 @@ public partial class Canvas : UserControl
     public Canvas()
     {
         InitializeComponent();
+        Viewport.AddHandler(PointerPressedEvent, Viewport_OnPointerPressed,  RoutingStrategies.Tunnel);
     }
 
     private void Shape_OnPointerPressed(object? sender, PointerPressedEventArgs e)
@@ -84,6 +84,6 @@ public partial class Canvas : UserControl
 
     private void Viewport_OnPointerWheelChanged(object? sender, PointerWheelEventArgs e)
     {
-        Vm?.HandleViewportPointerWheelChanged(Viewport, PanTransform, ZoomTransform, e);
+        Vm?.HandleViewportPointerWheelChanged(Viewport, PanTransform, e);
     }
 }

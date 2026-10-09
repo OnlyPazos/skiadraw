@@ -20,13 +20,17 @@
         <Grid.Styles>
             <Style Selector="Grid.panning">
                 <Setter Property="Cursor"
-                        Value="{extensions:GeometryCursor
-                                Geometry={StaticResource HandGrabRegular},
-                                Stroke=White, StrokeThickness=1,
-                                HotspotX=12, HotspotY=12}" />
+                        Value="{extensions:GeometryCursor Geometry={StaticResource HandGrabRegular},
+                                Stroke=White, StrokeThickness=1, HotspotX=12, HotspotY=12}" />
+            </Style>
+
+            <Style Selector="Grid.panning :is(Control)">
+                <Setter Property="Cursor"
+                        Value="{extensions:GeometryCursor Geometry={StaticResource HandGrabRegular},
+                                Stroke=White, StrokeThickness=1, HotspotX=12, HotspotY=12}" />
             </Style>
         </Grid.Styles>
-        
+
         <Grid Name="CanvasRoot">
             <Grid.RenderTransform>
                 <TransformGroup>
@@ -96,7 +100,9 @@
                             RadiusX="{Binding Radius}"
                             RadiusY="{Binding Radius}"
                             IsVisible="{Binding IsVisible}"
-                            Cursor="SizeAll"
+                            Cursor="{Binding $parent[ItemsControl].((vm:CanvasViewModel)DataContext).SelectedTool,
+                                        Converter={x:Static conv:ShapeCursorConverter.Instance},
+                                        FallbackValue={x:Null}}"
                             RenderTransformOrigin="50%,50%"
                             PointerPressed="Shape_OnPointerPressed"
                             PointerMoved="Shape_OnPointerMoved"
@@ -118,7 +124,9 @@
                             StrokeThickness="{Binding StrokeThickness}"
                             StrokeDashArray="{Binding StrokeDashArray}"
                             IsVisible="{Binding IsVisible}"
-                            Cursor="SizeAll"
+                            Cursor="{Binding $parent[ItemsControl].((vm:CanvasViewModel)DataContext).SelectedTool,
+                                        Converter={x:Static conv:ShapeCursorConverter.Instance},
+                                        FallbackValue={x:Null}}"
                             RenderTransformOrigin="50%,50%"
                             PointerPressed="Shape_OnPointerPressed"
                             PointerMoved="Shape_OnPointerMoved"

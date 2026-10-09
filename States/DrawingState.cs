@@ -8,5 +8,5 @@ public partial class DrawingState : ObservableObject
     [ObservableProperty]
     private Tool _selectedTool = Tool.Selection;
     [ObservableProperty]
-    private object _selectedObject = null;
+    private object? _selectedObject = null;
 }

@@ -106,9 +106,7 @@
                             RenderTransformOrigin="50%,50%"
                             PointerPressed="Shape_OnPointerPressed"
                             PointerMoved="Shape_OnPointerMoved"
-                            PointerReleased="Shape_OnPointerReleased"
-                            PointerEntered="Canvas_OnPointerEntered"
-                            PointerExited="Canvas_OnPointerExited">
+                            PointerReleased="Shape_OnPointerReleased">
                             <Rectangle.RenderTransform>
                                 <RotateTransform Angle="{Binding Rotation}" />
                             </Rectangle.RenderTransform>
@@ -130,9 +128,7 @@
                             RenderTransformOrigin="50%,50%"
                             PointerPressed="Shape_OnPointerPressed"
                             PointerMoved="Shape_OnPointerMoved"
-                            PointerReleased="Shape_OnPointerReleased"
-                            PointerEntered="Canvas_OnPointerEntered"
-                            PointerExited="Canvas_OnPointerExited">
+                            PointerReleased="Shape_OnPointerReleased">
                             <Ellipse.RenderTransform>
                                 <RotateTransform Angle="{Binding Rotation}" />
                             </Ellipse.RenderTransform>

@@ -56,16 +56,6 @@ public partial class Canvas : UserControl
         var point = e.GetPosition(DrawCanvas);
         Vm?.HandlePointerReleased(point);
     }
-
-    private void Canvas_OnPointerEntered(object? sender, PointerEventArgs e)
-    {
-        Vm?.HandleShapePointerEntered(sender, e);
-    }
-
-    private void Canvas_OnPointerExited(object? sender, PointerEventArgs e)
-    {
-        Vm?.HandleShapePointerExited(sender, e);
-    }
     
     private void Viewport_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {

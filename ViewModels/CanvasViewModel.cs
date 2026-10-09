@@ -393,22 +393,4 @@ public partial class CanvasViewModel : ViewModelBase
     {
         return shape.Width < MinSize || shape.Height < MinSize;
     }
-
-
-    // SHAPE HOVER
-    public void HandleShapePointerEntered(object? sender, PointerEventArgs e)
-    {
-        if (SelectedShape != null) return;
-
-        if (e.Source is not Control { DataContext: ShapeModel shape } control) return;
-
-        _inspector.ShowAll(shape, this);
-    }
-
-    public void HandleShapePointerExited(object? sender, PointerEventArgs e)
-    {
-        if (SelectedShape != null) return;
-
-        _inspector.ShowAll(SelectedShape, this);
-    }
 }

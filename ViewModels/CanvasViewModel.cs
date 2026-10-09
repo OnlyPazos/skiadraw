@@ -85,6 +85,8 @@ public partial class CanvasViewModel : ViewModelBase
         var point = e.GetCurrentPoint(viewport);
 
         if (!point.Properties.IsMiddleButtonPressed) return;
+        
+        viewport.Classes.Set("panning", true);
 
         _panStart = point.Position;
         _panStartX = panTransform.X;
@@ -107,6 +109,10 @@ public partial class CanvasViewModel : ViewModelBase
     {
         if (_panStart is null) return;
         _panStart = null;
+        
+        if (sender is StyledElement viewport)
+            viewport.Classes.Set("panning", false);
+        
         e.Pointer.Capture(null);
         e.Handled = true;
     }

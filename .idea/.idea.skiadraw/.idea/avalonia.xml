@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="App.axaml" value="skiadraw.csproj" />
+        <entry key="Styles/Controls.axaml" value="skiadraw.csproj" />
+        <entry key="Styles/Icons.axaml" value="skiadraw.csproj" />
+        <entry key="Styles/Themes.axaml" value="skiadraw.csproj" />
+        <entry key="Styles/Tokens.axaml" value="skiadraw.csproj" />
+        <entry key="Views/Canvas.axaml" value="skiadraw.csproj" />
+        <entry key="Views/DebugPanel.axaml" value="skiadraw.csproj" />
+        <entry key="Views/MainWindow.axaml" value="skiadraw.csproj" />
+        <entry key="Views/SelectionAdorner.axaml" value="skiadraw.csproj" />
+        <entry key="Views/Toolbar.axaml" value="skiadraw.csproj" />
+        <entry key="Views/UndoRedo.axaml" value="skiadraw.csproj" />
+        <entry key="Views/Zoom.axaml" value="skiadraw.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

@@ -6,6 +6,7 @@
              xmlns:vm="using:skiadraw.ViewModels"
              xmlns:conv="using:skiadraw.Converters"
              xmlns:m="clr-namespace:skiadraw.Models"
+             xmlns:extensions="clr-namespace:skiadraw.Extensions"
              mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="360"
              x:Class="skiadraw.Views.Canvas"
              x:DataType="vm:CanvasViewModel">
@@ -17,7 +18,16 @@
           PointerMoved="Viewport_OnPointerMoved"
           PointerReleased="Viewport_OnPointerReleased"
           PointerWheelChanged="Viewport_OnPointerWheelChanged">
-
+        <Grid.Styles>
+            <Style Selector="Grid.panning">
+                <Setter Property="Cursor"
+                        Value="{extensions:GeometryCursor
+                                Geometry={StaticResource HandGrabRegular},
+                                Stroke=White, StrokeThickness=1,
+                                HotspotX=12, HotspotY=12}" />
+            </Style>
+        </Grid.Styles>
+        
         <Grid Name="CanvasRoot">
             <Grid.RenderTransform>
                 <TransformGroup>

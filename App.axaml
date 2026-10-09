@@ -2,25 +2,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="skiadraw.App"
              xmlns:local="using:skiadraw"
+             xmlns:extensions="clr-namespace:skiadraw.Extensions"
              RequestedThemeVariant="Default">
 
     <Application.DataTemplates>
         <local:ViewLocator />
     </Application.DataTemplates>
 
-    <Application.Styles>
-        <FluentTheme />
-        
-        <StyleInclude Source="/Styles/Controls.axaml"/>
-    </Application.Styles>
-    
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source="/Styles/Tokens.axaml"/>
-                <ResourceInclude Source="/Styles/Icons.axaml"/>
-                <ResourceInclude Source="/Styles/Themes.axaml"/>
+                <ResourceInclude Source="/Styles/Tokens.axaml" />
+                <ResourceInclude Source="/Styles/Icons.axaml" />
+                <ResourceInclude Source="/Styles/Themes.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
+
+    <Application.Styles>
+        <FluentTheme />
+
+        <StyleInclude Source="/Styles/Controls.axaml" />
+
+
+        <Style Selector="Window">
+            <Setter Property="Cursor"
+                    Value="{extensions:GeometryCursor
+                            Geometry={StaticResource CursorRegular},
+                            Fill=White, Stroke=Black, StrokeThickness=1,
+                            Size=24, HotspotX=2, HotspotY=2}" />
+        </Style>
+    </Application.Styles>
 </Application>

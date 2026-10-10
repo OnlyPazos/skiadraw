@@ -21,13 +21,13 @@
             <Style Selector="Grid.panning">
                 <Setter Property="Cursor"
                         Value="{extensions:GeometryCursor Geometry={StaticResource HandGrabRegular},
-                                Stroke=White, StrokeThickness=1, HotspotX=12, HotspotY=12}" />
+                                Fill={x:Null}, Stroke=White, StrokeThickness=2, HotspotX=12, HotspotY=12}" />
             </Style>
 
             <Style Selector="Grid.panning :is(Control)">
                 <Setter Property="Cursor"
                         Value="{extensions:GeometryCursor Geometry={StaticResource HandGrabRegular},
-                                Stroke=White, StrokeThickness=1, HotspotX=12, HotspotY=12}" />
+                                Fill={x:Null}, Stroke=White, StrokeThickness=2, HotspotX=12, HotspotY=12}" />
             </Style>
         </Grid.Styles>
 

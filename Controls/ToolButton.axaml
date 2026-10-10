@@ -1,0 +1,23 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:skiadraw.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="skiadraw.Controls.ToolButton"
+             x:DataType="controls:ToolButton">
+
+    <Button Classes="tool" Padding="0" Width="36" Height="36" HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            ToolTip.Tip="{Binding ToolTip, RelativeSource={RelativeSource AncestorType=controls:ToolButton}}"
+            Command="{Binding Command, RelativeSource={RelativeSource AncestorType=controls:ToolButton}}"
+            CommandParameter="{Binding CommandParameter, RelativeSource={RelativeSource AncestorType=controls:ToolButton}}"
+            Classes.selected="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=controls:ToolButton}}">
+
+        <Canvas Width="24" Height="24">
+            <Path Data="{Binding Icon, RelativeSource={RelativeSource AncestorType=controls:ToolButton}}"
+                  Fill="{x:Null}"
+                  Stroke="{DynamicResource ColorText}" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" />
+        </Canvas>
+    </Button>
+</UserControl>

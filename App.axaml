@@ -24,12 +24,11 @@
 
         <StyleInclude Source="/Styles/Controls.axaml" />
 
-
         <Style Selector="Window">
             <Setter Property="Cursor"
                     Value="{extensions:GeometryCursor
                             Geometry={StaticResource CursorRegular},
-                            Fill=White, Stroke=Black, StrokeThickness=1,
+                            Fill={x:Null}, Stroke=White, StrokeThickness=2,
                             Size=24, HotspotX=2, HotspotY=2}" />
         </Style>
     </Application.Styles>

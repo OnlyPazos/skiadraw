@@ -18,7 +18,7 @@ public class ToolToCursorConverter : IValueConverter
     private static readonly Dictionary<Tool, CursorSpec> Specs = new()
     {
         [Tool.Hand]      = new CursorSpec("HandOpenRegular", 12, 12),
-        [Tool.Selection] = new CursorSpec("CursorRegular", 12, 12),
+        [Tool.Selection] = new CursorSpec("CursorRegular", 2, 2),
         [Tool.Rectangle] = new CursorSpec("CrosshairRegular", 12, 12),
         [Tool.Diamond]   = new CursorSpec("CrosshairRegular", 12, 12),
         [Tool.Ellipse]   = new CursorSpec("CrosshairRegular", 12, 12),
@@ -51,7 +51,7 @@ public class ToolToCursorConverter : IValueConverter
         {
             return CursorFactory.FromGeometry(
                 geometry,
-                fill: Brushes.Transparent, stroke: Brushes.White, strokeThickness: 1,
+                fill: Brushes.Transparent, stroke: Brushes.White, strokeThickness: 2,
                 size: 24, hotspotX: spec.HotspotX, hotspotY: spec.HotspotY);
         }
 

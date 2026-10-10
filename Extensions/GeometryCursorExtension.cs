@@ -14,7 +14,7 @@ public class GeometryCursorExtension : MarkupExtension
     public Geometry? Geometry { get; set; }
     public IBrush Fill { get; set; } = Brushes.White;
     public IBrush Stroke { get; set; } = Brushes.Black;
-    public double StrokeThickness { get; set; } = 1.5;
+    public double StrokeThickness { get; set; } = 2;
     public int Size { get; set; } = 24;
     public int HotspotX { get; set; }
     public int HotspotY { get; set; }

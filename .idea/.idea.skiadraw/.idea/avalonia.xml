@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="App.axaml" value="skiadraw.csproj" />
+        <entry key="Controls/ToolButton.axaml" value="skiadraw.csproj" />
         <entry key="Styles/Controls.axaml" value="skiadraw.csproj" />
         <entry key="Styles/Icons.axaml" value="skiadraw.csproj" />
         <entry key="Styles/Themes.axaml" value="skiadraw.csproj" />

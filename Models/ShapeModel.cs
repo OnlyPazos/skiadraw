@@ -67,6 +67,11 @@ public partial class RectangleShape : ShapeModel
     [ObservableProperty] private double _radius = ResourceHelper.GetResource("RadiusExtraLarge", 0.0);
 }
 
+public partial class DiamondShape : ShapeModel
+{
+    [ObservableProperty] private double _radius = ResourceHelper.GetResource("RadiusExtraLarge", 0.0);
+}
+
 public partial class EllipseShape : ShapeModel
 {
 }
